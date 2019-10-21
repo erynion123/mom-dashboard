@@ -51,7 +51,7 @@ export class DataService {
   } // extractData
 
   // HANDLE ERROR
-  private handleError(error: any) {
+  private handleError(error: any,obs) {
     if (error.status == 401) {
       // this.authService.logout();
       // this._router.navigate(['user/logout']);
@@ -60,7 +60,7 @@ export class DataService {
       //   this.alertService.error("System error. Please try again later.",true);
       // }
     }
-    return console.log(error || 'Server error');
+    return obs.throw(error || 'Server error');
   } // handleError
 
   // MAKES A GET REQUEST
@@ -74,25 +74,14 @@ export class DataService {
 
     url = this.getFullUrl(url, source);
     // const spinner = this.spinner;
-    const observable = new Observable(observer => {
-      // if (runSpinner){
-      //   spinner.show();
-      // }
-      this.http
-        .get(url, options)
-        .subscribe((data: any) => {
-          DataService.counter--;
-          if (DataService.counter === 0) {
-            // this.ngSpinningPreloader.stop();
-          }
-          // spinner.hide();
-          observer.next(data);
-        }, (error: any) => {
-          // spinner.hide();
-          this.handleError(error);
-        });
-    });
-    return observable;
+    return this.http
+      .get(url, options)
+      .pipe(map(
+        (res: any) => {
+          // this.spinner.hide();
+          return this.extractData(res);
+        }))
+      .pipe(catchError((error:any,obs) => this.handleError(error,obs)))
   } // get
 
   // MAKES A POST REQUEST
@@ -114,7 +103,7 @@ export class DataService {
           // this.spinner.hide();
           return this.extractData(res);
         }))
-      .pipe(catchError((error:any) => this.handleError(error)))
+      .pipe(catchError((error:any,obs) => this.handleError(error,obs)))
       // .finally(() => {this.spinner.hide() });
   } // post
 
@@ -134,7 +123,7 @@ export class DataService {
         // this.spinner.hide();
         return this.extractData(res);
       }))
-      .pipe(catchError((error:any) => this.handleError(error)))
+      .pipe(catchError((error:any,obs) => this.handleError(error,obs)))
       // .finally(() => { this.spinner.hide() });
   } // put
 
@@ -152,7 +141,7 @@ export class DataService {
         // this.spinner.hide();
         return this.extractData(res);
       }))
-      .pipe(catchError((error:any) => this.handleError(error)))
+      .pipe(catchError((error:any,obs) => this.handleError(error,obs)))
       // .finally(() => { this.spinner.hide() });
   } // delete
 
@@ -172,7 +161,7 @@ export class DataService {
         // this.spinner.hide();
         return this.extractData(res);
       }))
-      .pipe(catchError((error:any) => this.handleError(error)))
+      .pipe(catchError((error:any,obs) => this.handleError(error,obs)))
       // .finally(() => { this.spinner.hide() });
   } // patch
 
