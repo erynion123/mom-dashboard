@@ -12,6 +12,7 @@ export class MenuComponent implements OnInit {
   selectedDay = 'Monday';
   mode = 'info';
   selectedDayMenu: any;
+  type:any;
   constructor(
     private dataService: DataService
   ) { }
