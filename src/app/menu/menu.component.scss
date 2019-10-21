@@ -1,0 +1,56 @@
+.menu-overview{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .days{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    button{
+      margin-bottom: 15px;
+      width: 135px;
+    }
+  }
+  .menu{
+    flex-grow: 1;
+  }
+}
+.add-menu{
+  .card{
+    .card-header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      i{
+        cursor: pointer;
+      }
+    }
+    .card-body{
+      .mat-form-field{
+        width: 200px;
+        margin: 20px;
+      }
+      .menu-type{
+        margin: 20px;
+        .mat-radio-button{
+          margin-right: 10px;
+        }
+      }
+      .availability{
+        margin: 20px;
+        .mat-checkbox{
+          margin-right: 10px;
+        }
+      }
+      .description{
+        margin: 20px;
+        textarea{
+          border: 0;
+          border-bottom: 1px solid;
+        }
+      }
+    }
+  }
+}

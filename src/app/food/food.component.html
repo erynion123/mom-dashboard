@@ -1,0 +1,117 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Food Categories</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Action
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let category of foodCategories;let i = index">
+                                      <td>
+                                          {{i + 1}}
+                                      </td>
+                                      <td>
+                                          {{category}}
+                                      </td>
+                                      <td>
+                                        <button type="button" class="btn mat-raised-button btn-warning">Edit</button>
+                                        <button type="button" class="btn mat-raised-button btn-danger">Remove</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Category Name" type="text">
+                                      </mat-form-field>
+                                    </td>
+                                    <td>
+                                      <button type="button" class="btn btn-danger mat-raised-button" name="button">Add</button>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Food Items</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Description
+                                  </th>
+                                  <th>
+                                      Action
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let item of foodItems;let i = index">
+                                      <td>
+                                          {{i + 1}}
+                                      </td>
+                                      <td>
+                                          {{item.name}}
+                                      </td>
+                                      <td>
+                                          {{item.description}}
+                                      </td>
+                                      <td>
+                                        <button type="button" class="btn mat-raised-button btn-warning">Edit</button>
+                                        <button type="button" class="btn mat-raised-button btn-danger" (click)="deleteItem('item',item.id,i)">Remove</button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Item Name" type="text" [(ngModel)]="newItem.name">
+                                      </mat-form-field>
+                                    </td>
+                                    <td>
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Item Description" type="text" [(ngModel)]="newItem.description">
+                                      </mat-form-field>
+                                    </td>
+                                    <td>
+                                      <button type="button" class="btn btn-danger mat-raised-button" name="button" (click)="addFoodItem(newItem)">Add</button>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

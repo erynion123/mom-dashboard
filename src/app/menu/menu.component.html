@@ -1,0 +1,90 @@
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="menu-overview" [hidden]="mode != 'info'">
+        <div class="days">
+          <button type="button" class="btn mat-raised-button {{selectedDay == day ? 'btn-warning' : 'btn-danger'}}" *ngFor="let day of days" (click)="selectDay(day)">{{day}}</button>
+        </div>
+        <div class="menu">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Menus</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-primary">
+                    <th>Menu</th>
+                    <th>Type</th>
+                    <th>Main cource</th>
+                    <th>Time</th>
+                    <th>Item count</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let menu of selectedDayMenu">
+                        <td>{{menu.name}}</td>
+                        <td>{{menu.food_type}}</td>
+                        <td>{{menu.name}}</td>
+                        <td>{{menu.available}}</td>
+                        <td>{{menu.items.length}}</td>
+                        <td>{{menu.status ? 'Show' : 'Hide'}}</td>
+                        <td><button type="button" class="btn mat-raised-button btn-warning">Edit</button></td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="button" class="btn btn-danger mat-raised-button" (click)="mode = 'add'">Add new Menu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="add-menu" [hidden]="mode != 'add'">
+      <div class="card">
+        <div class="card-header card-header-info">
+          <h4 class="card-title">Add Menu : {{selectedDay}}</h4>
+          <i class="material-icons pull-right" (click)="mode = 'info'">keyboard_backspace</i>
+        </div>
+        <div class="card-body">
+          <mat-form-field>
+            <mat-label>Menu Category</mat-label>
+            <mat-select>
+              <mat-option value="indian">Indian</mat-option>
+              <mat-option value="Chinese">chinese</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="menu-type">
+            <mat-radio-group [(ngModel)]="type">
+              <mat-radio-button class="example-radio-button" value="veg">
+                Veg
+              </mat-radio-button>
+              <mat-radio-button class="example-radio-button" value="non-veg">
+                Non Veg
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <section class="availability">
+            <mat-checkbox>BreakFast</mat-checkbox>
+            <mat-checkbox>Lunch</mat-checkbox>
+            <mat-checkbox>Dinner</mat-checkbox>
+          </section>
+
+          <mat-form-field>
+            <mat-label>Food items</mat-label>
+            <mat-select>
+              <mat-option value="rajma curry">Rajma curry</mat-option>
+              <mat-option value="Ghee rice">Ghee rice</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="description">
+            <textarea name="name" rows="4" placeholder="Describe the menu"></textarea>
+          </div>
+          <button type="button" class="submit btn mat-raised-button btn-info" name="button">Add menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
